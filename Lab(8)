@@ -27,7 +27,7 @@ int main()
 
     for (int i = 0;i < n;i++)
     {
-        if (abs(Earray[i]) > abs(max))
+        if (abs(Earray[i]) > max)
         {
             max = abs(Earray[i]);
         }
