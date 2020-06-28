@@ -1,0 +1,142 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+#pragma warning(disable : 4996)
+
+void func(int n, double *Earray);
+
+int main()
+{
+    double* Earray;
+    int n;
+    printf("Size of array=");
+    scanf("%d", &n);
+
+    Earray = malloc(n * sizeof(double));
+
+    for (int i = 0;i < n; i++)
+    {
+        printf("Earray[%d]=", i);
+        scanf("%lf", &Earray[i]);
+    }
+
+    func(n,&Earray[0]);
+
+    return 0;
+}
+
+void func(int n, double *Earray) 
+{
+    // Task number 1
+
+    printf("\nTask(1)\n");
+
+    double max = abs(Earray[0]);
+
+    for (int i = 0;i < n;i++)
+    {
+        if (abs(Earray[i]) > abs(max))
+        {
+            max = abs(Earray[i]);
+        }
+    }
+
+
+    printf("Maximum array element module = %lf\n", max);
+
+    // Task number 2
+
+    printf("\nTask(2)");
+
+    int index1, index2;
+    int counter = 0;
+    double summa = 0;
+
+    for (int i = 0; i < n;i++)
+    {
+        if (Earray[i] > 0)
+        {
+            counter++;
+            if (counter == 1) index1 = i;
+            if (counter == 2) index2 = i;
+        };
+    }
+
+    printf("\nIndex1 = %d\tIndex2 = %d\n", index1, index2);
+
+
+
+    for (int index4 = index1; index4 < index2; index4++)
+    {
+        summa += Earray[index4];
+    }
+
+    printf("Summ positive elements [%d;%d] = %lf\n", index1, index2, summa - Earray[index1]);
+
+    // Task number 3
+
+    printf("\nTask(3)\n");
+
+    int zerocount = 0;
+
+    for (int i = 0;i < n;i++)
+    {
+        if (Earray[i] != 0)
+        {
+            Earray[i - zerocount] = Earray[i];
+        }
+        else
+        {
+            zerocount++;
+        }
+    }
+
+    for (int i = n - zerocount; i < n;i++)
+    {
+        Earray[i] = 0;
+    }
+
+    for (int i = 0; i < n;i++)
+    {
+        printf("%lf\t", Earray[i]);
+    }
+
+    printf("\n");
+
+    // Task number 4
+
+    printf("\nTask(4)\n");
+
+    int mark_2 = 0;
+
+    for (int i = 0; i < n;i++)
+    {
+        if (Earray[i] == 2) mark_2++;
+    }
+
+    printf("%d students are not admitted to the second exam\n", mark_2);
+
+    printf("%d bytes allocated to the array\n", sizeof(Earray));
+
+    free(Earray);
+
+    // A(1)
+
+    char * pchar;
+    short * pshort;
+    int* pint;
+    long* plong;
+    float* pfloat;
+    double* pdouble;
+    long double *pld;
+
+    printf("\n Size of char: %d\t Size of p(char): %d\n", sizeof(char), sizeof(pchar));
+    printf("\n Size of short: %d\t Size of p(short): %d\n", sizeof(short), sizeof(pshort));
+    printf("\n Size of int: %d\t\t Size of p(int): %d\n", sizeof(int), sizeof(pint));
+    printf("\n Size of long: %d\t Size of p(long): %d\n", sizeof(long), sizeof(plong));
+    printf("\n Size of float: %d\t Size of p(float): %d\n", sizeof(float), sizeof(pfloat));
+    printf("\n Size of double: %d\t Size of p(double): %d\n", sizeof(double), sizeof(pdouble));
+    printf("\n Size of long double: %d\t Size of p(long double): %d\n", sizeof(long double), sizeof(pld));
+
+}

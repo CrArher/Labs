@@ -1,0 +1,211 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#pragma warning(disable : 4996)
+
+int main()
+{
+    //Task(1)
+    printf("Task(1)\nMatrix(1)\n");
+
+    //Зашиваю количественные характеристики директивой
+    #define rows 4
+    #define columns 8
+    
+    int array[rows][columns];
+
+    for (int i = 0; i < rows;i++)
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] = -10 + rand() % 20;
+        }
+
+    array[0][0] = 0;
+    array[0][1] = 0;
+    array[3][2] = 0;
+    array[2][2] = 0;
+    array[0][4] = 0;
+    array[1][7] = 0;
+
+    for (int i = 0; i < rows;i++) {
+        for (int j = 0; j < columns; ++j) {
+            printf("%d\t", array[i][j]);
+        }
+        printf("\n");
+    }
+
+    int count = 0;
+
+    for (int i = 0; i < columns; ++i) {
+        for (int j = 0; j < rows; ++j) {
+            if (array[j][i] == 0) {
+                count++;
+                break;
+            }
+        }
+    }
+
+    printf("\nQuantity of a null columns = %d\n", count);
+
+    //Task(2)
+
+    int max_count = 0, cnt_2, i_pos = -1, i_count = -1;
+
+
+
+    for (int i = 0; i < rows; ++i) {
+        cnt_2 = 0;
+        for (int j = 1; j < columns; ++j) {
+            if (array[i][j] == array[i][j - 1]) cnt_2++;
+            else {
+                if (cnt_2 > max_count) {
+                    max_count = cnt_2;
+                    i_pos = i;
+                    i_count++;
+                }
+                cnt_2 = 0;
+            }
+        }
+        if (cnt_2 > max_count) {
+            max_count = cnt_2;
+            i_pos = i;
+            i_count++;
+        }
+    }
+
+    printf("Task(2)\n");
+
+    if (i_count == -1) printf("No rows found with a series of matching items\n");
+
+    printf("%d row with max series of matching items\n", i_pos + 1);
+
+    //Task(3)
+
+    printf("\nTask(3)\n");
+
+    int n;
+
+    printf("n=");
+    scanf("%d", &n);
+
+    // Выделяю память под динамический массив
+
+    int** A = (int**)malloc(n * sizeof(int*));
+    for (int l = 0; l < n; ++l) {
+        A[l] = (int*)malloc(n * sizeof(int));
+    }
+
+    // Заполняю массив рандомными элементами от 0 до 1
+
+    for (int k = 0; k < n; ++k) {
+        for (int i = 0; i < n; ++i) {
+            *(*(A + i) + k) = rand() % 2;
+        }
+    }
+
+    // Перебираю его
+
+    for (int i1 = 0; i1 < n; ++i1) {
+        for (int i = 0; i < n; ++i) {
+            printf("%d\t", *(*(A + i1) + i));
+        }
+        printf("\n");
+    }
+
+    //Проверяю на симметричность
+
+    int symmetrical = 1;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n;++j) {
+            if (*(*(A + i) + j) != *(*(A + j) + i)) symmetrical = 0;
+        }
+    }
+
+    if (symmetrical == 0) printf("Matrix not symmetric\n");
+    if (symmetrical == 1) printf("This is symmetric matrix\n");
+
+    //Проверяю на случай симметричности
+
+    for (int k1 = 0; k1 < n; ++k1) {
+        for (int i = 0; i < n; ++i) {
+            *(*(A + k1) + i) = *(*(A + i) + k1);
+        }
+    }
+
+    for (int i1 = 0; i1 < n; ++i1) {
+        for (int i = 0; i < n; ++i) {
+            printf("%d\t", *(*(A + i1) + i));
+        }
+        printf("\n");
+    }
+
+    symmetrical = 1;
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n;++j) {
+            if (*(*(A + i) + j) != *(*(A + j) + i)) symmetrical = 0;
+        }
+    }
+
+    if (symmetrical == 0) printf("Matrix not symmetric");
+    if (symmetrical == 1) printf("This is symmetric matrix\n");
+
+    for (int j1 = 0; j1 < n; ++j1) free(A[j1]);
+    free(A);
+
+    //Task(4)
+
+    //Работаем с новым массивом
+
+    //Зашиваю количественные характеристики директивой
+    #define n_4 5
+    #define m_4 5
+
+    printf("\nTask(4)\n");
+
+    int a_4[n_4][m_4];
+
+    for (int i = 0; i < n_4;i++)
+        for (int j = 0; j < m_4; ++j) {
+            a_4[i][j] = rand() % 10;
+        }
+
+    for (int m = 0; m < n_4; ++m) {
+        for (int i = 0; i < m_4; ++i) {
+            printf("%d\t", a_4[m][i]);
+        }
+        printf("\n");
+    }
+
+    int Imax, Jmax;
+
+    for (int i = 0; i < n_4; ++i) {
+        int max = a_4[i][0];
+        for (int j = 0; j < m_4; ++j) {
+            if (a_4[i][j] > max) {
+                max = a_4[i][j];
+                Imax = i;
+                Jmax = j;
+            }
+        }
+        int z = a_4[Imax][Jmax];
+        a_4[Imax][Jmax] = a_4[i][i];
+        a_4[i][i] = z;
+
+        Imax = i + 1;
+        Jmax = 0;
+    }
+
+    //Removed matrix
+
+    printf("\nRemoved matrix\n");
+
+    for (int i = 0; i < n_4; ++i) {
+        for (int j = 0; j < m_4; ++j) {
+            printf("%d\t", a_4[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}

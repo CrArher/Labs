@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#pragma warning(disable:4996)
+
+
+
+struct STRUCT {
+    char surname[20];
+    int num_gr;
+    int academic[5];
+};
+
+
+int main(void) {
+    struct STRUCT student[10];
+
+    for (int i = 0; i < 10; ++i) {
+        printf("Enter information about %d student\nSurname:", i + 1);
+        scanf("%s", &student[i].surname);
+        printf("\nNumber of group:");
+        scanf("%d", &student[i].num_gr);
+        printf("\nAcademic performance:");
+        for (int j = 0; j < 5; ++j) {
+            printf("\n(%d)mark =", j + 1);
+            scanf("%d", &student[i].academic[j]);
+        }
+    }
+
+    struct STRUCT temp;
+
+    for (int i = 1; i < 8; i++) {
+        for (int j = 0; j < 8 - i; j++) {
+            if (strcmp(student[j].surname, student[j + 1].surname) > 0) {
+                temp = student[j];
+                student[j] = student[j + 1];
+                student[j + 1] = temp;
+            }
+        }
+    }
+
+    int count_out = 0;
+
+    for (int i = 0; i < 10; ++i) {
+        int count = 0;
+        for (int j = 0; j < 5; ++j) {
+            if (student[i].academic[j] == 2 && count == 0) {
+                count++;
+                count_out++;
+                printf("\nStudent: %s\tGroup: %d\n", student[i].surname, student[i].num_gr);
+            }
+        }
+    }
+
+    if (count_out == 0) printf("\nStudents who received 2 not found\n");
+
+    return 0;
+}
