@@ -4,77 +4,77 @@
 
 #pragma warning(disable : 4996)
 
-void func(int n, double *Earray);
+void func(int n, double *maArray);
 
 int main()
 {
-    double* Earray;
+    double* maArray;
     int n;
     printf("Size of array=");
     scanf("%d", &n);
 
-    Earray = malloc(n * sizeof(double));
+    maArray = malloc(n * sizeof(double));
 
     for (int i = 0;i < n; i++)
     {
-        printf("Earray[%d]=", i);
-        scanf("%lf", &Earray[i]);
+        printf("maArray[%d]=", i);
+        scanf("%lf", &maArray[i]);
     }
 
-    func(n,&Earray[0]);
+    func(n,&maArray[0]);
 
     return 0;
 }
 
-void func(int n, double *Earray) 
+void func(int n, double *maArray) 
 {
-    // Task number 1
+    // Task  1
 
     printf("\nTask(1)\n");
 
-    double max = abs(Earray[0]);
+    double max = abs(maArray[0]);
 
     for (int i = 0;i < n;i++)
     {
-        if (abs(Earray[i]) > abs(max))
+        if (abs(maArray[i]) > abs(max))
         {
-            max = abs(Earray[i]);
+            max = abs(maArray[i]);
         }
     }
 
 
     printf("Maximum array element module = %lf\n", max);
 
-    // Task number 2
+    // Task  2
 
     printf("\nTask(2)");
 
-    int index1, index2;
+    int i1, i2;
     int counter = 0;
-    double summa = 0;
+    double sum = 0;
 
     for (int i = 0; i < n;i++)
     {
-        if (Earray[i] > 0)
+        if (maArray[i] > 0)
         {
             counter++;
-            if (counter == 1) index1 = i;
-            if (counter == 2) index2 = i;
+            if (counter == 1) i1 = i;
+            if (counter == 2) i2 = i;
         };
     }
 
-    printf("\nIndex1 = %d\tIndex2 = %d\n", index1, index2);
+    printf("\ni1 = %d\ti2 = %d\n", i1, i2);
 
 
 
-    for (int index4 = index1; index4 < index2; index4++)
+    for (int i4 = i1; i4 < i2; i4++)
     {
-        summa += Earray[index4];
+        sum += maArray[i4];
     }
 
-    printf("Summ positive elements [%d;%d] = %lf\n", index1, index2, summa - Earray[index1]);
+    printf("Summ positive elements [%d;%d] = %lf\n", i1, i2, sum - maArray[i1]);
 
-    // Task number 3
+    // Task  3
 
     printf("\nTask(3)\n");
 
@@ -82,9 +82,9 @@ void func(int n, double *Earray)
 
     for (int i = 0;i < n;i++)
     {
-        if (Earray[i] != 0)
+        if (maArray[i] != 0)
         {
-            Earray[i - zerocount] = Earray[i];
+            maArray[i - zerocount] = maArray[i];
         }
         else
         {
@@ -94,17 +94,17 @@ void func(int n, double *Earray)
 
     for (int i = n - zerocount; i < n;i++)
     {
-        Earray[i] = 0;
+        maArray[i] = 0;
     }
 
     for (int i = 0; i < n;i++)
     {
-        printf("%lf\t", Earray[i]);
+        printf("%lf\t", maArray[i]);
     }
 
     printf("\n");
 
-    // Task number 4
+    // Task  4
 
     printf("\nTask(4)\n");
 
@@ -112,14 +112,14 @@ void func(int n, double *Earray)
 
     for (int i = 0; i < n;i++)
     {
-        if (Earray[i] == 2) mark_2++;
+        if (maArray[i] == 2) mark_2++;
     }
 
     printf("%d students are not admitted to the second exam\n", mark_2);
 
-    printf("%d bytes allocated to the array\n", sizeof(Earray));
+    printf("%d bytes allocated to the array\n", sizeof(maArray));
 
-    free(Earray);
+    free(maArray);
 
     // A(1)
 

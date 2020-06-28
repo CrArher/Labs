@@ -1,15 +1,15 @@
 #include<stdio.h>
 #pragma warning(disable : 4996)
 
-void fonk();
+void func();
 int main()
 {
-    fonk();
+    func();
 
     return 0;
 }
 
-void fonk()
+void func()
 {
     float s = 1, z = 1, x;
     int i, n;
